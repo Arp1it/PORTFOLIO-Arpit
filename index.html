@@ -5,507 +5,212 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="resu.png">
     <title>Arpit (Echo Cipher) - Resume</title>
-    <style>
-        :root {
-            --primary-color: #2a2a72;
-            --secondary-color: #009688;
-            --accent-color: #ff5722;
-            --dark-bg: #121212;
-            --light-bg: #f5f5f5;
-            --text-light: #f5f5f5;
-            --text-dark: #333;
-            --card-bg: #1e1e1e;
-            --card-highlight: #2d2d2d;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--dark-bg);
-            color: var(--text-light);
-            line-height: 1.6;
-            transition: background-color 0.3s, color 0.3s;
-        }
-
-        body.light-mode {
-            background-color: var(--light-bg);
-            color: var(--text-dark);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-            border-bottom: 2px solid var(--secondary-color);
-            margin-bottom: 30px;
-        }
-
-        .theme-toggle {
-            background: var(--primary-color);
-            color: var(--text-light);
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-
-        .theme-toggle:hover {
-            background-color: var(--secondary-color);
-        }
-
-        .profile {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .profile h1 {
-            font-size: 2.5rem;
-            color: var(--secondary-color);
-            margin-bottom: 10px;
-        }
-
-        .profile .subtitle {
-            font-size: 1.2rem;
-            font-style: italic;
-            margin-bottom: 20px;
-            color: var(--text-light);
-        }
-
-        .light-mode .profile .subtitle {
-            color: var(--text-dark);
-        }
-
-        .profile-image {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background-color: var(--primary-color);
-            margin: 0 auto 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-size: 48px;
-            color: var(--text-light);
-        }
-
-        .tab-container {
-            margin-bottom: 40px;
-        }
-
-        .tabs {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .tab {
-            padding: 10px 20px;
-            background-color: var(--card-bg);
-            color: var(--text-light);
-            border: none;
-            cursor: pointer;
-            margin: 5px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .light-mode .tab {
-            background-color: #e0e0e0;
-            color: var(--text-dark);
-        }
-
-        .tab.active {
-            background-color: var(--secondary-color);
-            color: var(--text-light);
-        }
-
-        .tab-content {
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        .section {
-            margin-bottom: 30px;
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            color: var(--secondary-color);
-            margin-bottom: 15px;
-            border-bottom: 1px solid var(--secondary-color);
-            padding-bottom: 5px;
-        }
-
-        .about-me {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-
-        .light-mode .about-me {
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .about-list {
-            list-style-type: none;
-        }
-
-        .about-list li {
-            margin-bottom: 10px;
-            position: relative;
-            padding-left: 25px;
-        }
-
-        .about-list li:before {
-            content: '•';
-            color: var(--accent-color);
-            position: absolute;
-            left: 0;
-            font-size: 1.2rem;
-        }
-
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .skill-category {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-        }
-
-        .light-mode .skill-category {
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .skill-category h3 {
-            margin-bottom: 15px;
-            color: var(--accent-color);
-        }
-
-        .skill-list {
-            list-style-type: none;
-        }
-
-        .skill-list li {
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-        }
-
-        .skill-bar {
-            height: 8px;
-            background-color: var(--card-highlight);
-            border-radius: 4px;
-            margin-left: 10px;
-            flex-grow: 1;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .light-mode .skill-bar {
-            background-color: #e0e0e0;
-        }
-
-        .skill-level {
-            height: 100%;
-            background-color: var(--accent-color);
-            border-radius: 4px;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .project-card {
-            background-color: var(--card-bg);
-            border-radius: 8px;
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .light-mode .project-card {
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .project-header {
-            background-color: var(--primary-color);
-            padding: 15px;
-            color: var(--text-light);
-        }
-
-        .project-body {
-            padding: 15px;
-        }
-
-        .project-tech {
-            margin-top: 10px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
-
-        .tech-tag {
-            background-color: var(--secondary-color);
-            color: var(--text-light);
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-        }
-
-        .contact-info {
-            background-color: var(--card-bg);
-            padding: 20px;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .light-mode .contact-info {
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .contact-link {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .contact-link:hover {
-            background-color: var(--secondary-color);
-        }
-
-        footer {
-            text-align: center;
-            margin-top: 40px;
-            padding: 20px 0;
-            border-top: 1px solid var(--secondary-color);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @media (max-width: 768px) {
-            .skills-container, .projects-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .profile h1 {
-                font-size: 2rem;
-            }
-            
-            .tab {
-                padding: 8px 15px;
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#2a2a72',
+                        secondary: '#009688',
+                        accent: '#ff5722',
+                        dark: {
+                            bg: '#121212',
+                            card: '#1e1e1e',
+                            highlight: '#2d2d2d'
+                        },
+                        light: {
+                            bg: '#f5f5f5',
+                            card: '#ffffff'
+                        }
+                    }
+                }
             }
         }
-    </style>
+    </script>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h2>My Portfolio</h2>
-            <button class="theme-toggle" id="themeToggle">Toggle Theme</button>
+<body class="bg-dark-bg text-gray-100 transition-colors duration-300" x-data="{ darkMode: true }">
+    <div class="max-w-6xl mx-auto p-5">
+        <header class="flex justify-between items-center py-5 border-b-2 border-secondary mb-8">
+            <h2 class="text-xl font-semibold">My Portfolio</h2>
+            <button id="themeToggle" class="bg-primary text-white py-2 px-4 rounded-full font-bold hover:bg-secondary transition-colors duration-300">Toggle Theme</button>
         </header>
 
-        <section class="profile">
-            <div class="profile-image">AC</div>
-            <h1>Arpit (Echo Cipher)</h1>
-            <p class="subtitle">Passionate Python Developer with a focus on Cybersecurity and Software Development</p>
+        <section class="text-center mb-10">
+            <div class="w-32 h-32 rounded-full bg-primary mx-auto mb-5 flex justify-center items-center text-4xl text-white">AC</div>
+            <h1 id="profileTitle" class="text-4xl font-bold text-secondary mb-2"></h1>
+            <p class="text-lg italic mb-5 text-gray-300 dark:text-gray-300 light:text-gray-700">Passionate Python Developer with a focus on Cybersecurity and Software Development</p>
         </section>
 
-        <div class="tab-container">
-            <div class="tabs">
-                <button class="tab active" data-tab="about">About Me</button>
-                <button class="tab" data-tab="skills">Skills</button>
-                <button class="tab" data-tab="projects">Projects</button>
-                <button class="tab" data-tab="contact">Contact</button>
+        <div class="mb-10">
+            <div class="flex justify-center mb-5 flex-wrap">
+                <button class="tab bg-dark-card text-white py-2 px-4 m-1 rounded cursor-pointer transition-colors duration-300 active" data-tab="about">About Me</button>
+                <button class="tab bg-dark-card text-white py-2 px-4 m-1 rounded cursor-pointer transition-colors duration-300" data-tab="skills">Skills</button>
+                <button class="tab bg-dark-card text-white py-2 px-4 m-1 rounded cursor-pointer transition-colors duration-300" data-tab="projects">Projects</button>
+                <button class="tab bg-dark-card text-white py-2 px-4 m-1 rounded cursor-pointer transition-colors duration-300" data-tab="contact">Contact</button>
             </div>
 
             <div id="about" class="tab-content active">
-                <div class="section">
-                    <h2 class="section-title">About Me</h2>
-                    <div class="about-me">
-                        <ul class="about-list">
-                            <li>Primarily a Python programmer, currently working with the Django framework.</li>
-                            <li>Learning C and React.js.</li>
-                            <li>Familiar with JavaScript (basics), Bootstrap, and HTML5.</li>
-                            <li>Experienced with Flask, Pandas, and various other Python frameworks.</li>
-                            <li>Knowledgeable in basic version control using GitHub.</li>
-                            <li>Explored malware development over the past few months.</li>
-                            <li>Passionate about Cybersecurity, AI, and Software Development.</li>
-                            <li>Always learning and exploring new technologies.</li>
+                <div class="mb-8">
+                    <h2 class="text-2xl text-secondary mb-4 border-b border-secondary pb-2">About Me</h2>
+                    <div class="bg-dark-card p-5 rounded-lg mb-5 shadow-lg">
+                        <ul class="space-y-3">
+                            <li class="pl-6 relative"><span class="absolute left-0 text-accent">•</span> Primarily a Python programmer, currently working with the Django framework.</li>
+                            <li class="pl-6 relative"><span class="absolute left-0 text-accent">•</span> Learning C and React.js.</li>
+                            <li class="pl-6 relative"><span class="absolute left-0 text-accent">•</span> Familiar with JavaScript (basics), Bootstrap, and HTML5.</li>
+                            <li class="pl-6 relative"><span class="absolute left-0 text-accent">•</span> Experienced with Flask, Pandas, and various other Python frameworks.</li>
+                            <li class="pl-6 relative"><span class="absolute left-0 text-accent">•</span> Knowledgeable in basic version control using GitHub.</li>
+                            <li class="pl-6 relative"><span class="absolute left-0 text-accent">•</span> Explored malware development over the past few months.</li>
+                            <li class="pl-6 relative"><span class="absolute left-0 text-accent">•</span> Passionate about Cybersecurity, AI, and Software Development.</li>
+                            <li class="pl-6 relative"><span class="absolute left-0 text-accent">•</span> Always learning and exploring new technologies.</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="section">
-                    <h2 class="section-title">Education</h2>
-                    <div class="about-me">
+                <div class="mb-8">
+                    <h2 class="text-2xl text-secondary mb-4 border-b border-secondary pb-2">Education</h2>
+                    <div class="bg-dark-card p-5 rounded-lg mb-5 shadow-lg">
                         <p>Continuously learning and exploring new technologies, with a focus on programming, cybersecurity, and software development.</p>
                     </div>
                 </div>
 
-                <div class="section">
-                    <h2 class="section-title">Blog</h2>
-                    <div class="about-me">
+                <div class="mb-8">
+                    <h2 class="text-2xl text-secondary mb-4 border-b border-secondary pb-2">Blog</h2>
+                    <div class="bg-dark-card p-5 rounded-lg mb-5 shadow-lg">
                         <p>Python23j: A blog where I share insights and tutorials related to Python programming.</p>
-                        <p>Visit: <a href="https://python23j.blogspot.com" target="_blank" style="color: var(--accent-color);">python23j.blogspot.com</a></p>
+                        <p class="mt-2">Visit: <a href="https://python23j.blogspot.com" target="_blank" class="text-accent hover:underline">python23j.blogspot.com</a></p>
                     </div>
                 </div>
             </div>
 
-            <div id="skills" class="tab-content">
-                <div class="section">
-                    <h2 class="section-title">Technical Skills</h2>
-                    <div class="skills-container">
-                        <div class="skill-category">
-                            <h3>Programming Languages</h3>
-                            <ul class="skill-list">
+            <div id="skills" class="tab-content hidden">
+                <div class="mb-8">
+                    <h2 class="text-2xl text-secondary mb-4 border-b border-secondary pb-2">Technical Skills</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        <div class="bg-dark-card p-5 rounded-lg shadow-lg">
+                            <h3 class="text-xl text-accent mb-4">Programming Languages</h3>
+                            <ul class="space-y-4">
                                 <li>
-                                    Python
-                                    <div class="skill-bar">
-                                        <div class="skill-level" style="width: 90%;"></div>
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span>Python</span>
+                                        <span>90%</span>
+                                    </div>
+                                    <div class="w-full bg-dark-highlight rounded-full h-2">
+                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="90%"></div>
                                     </div>
                                 </li>
                                 <li>
-                                    C (learning)
-                                    <div class="skill-bar">
-                                        <div class="skill-level" style="width: 40%;"></div>
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span>C (learning)</span>
+                                        <span>40%</span>
+                                    </div>
+                                    <div class="w-full bg-dark-highlight rounded-full h-2">
+                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="40%"></div>
                                     </div>
                                 </li>
                                 <li>
-                                    JavaScript (basics)
-                                    <div class="skill-bar">
-                                        <div class="skill-level" style="width: 35%;"></div>
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span>JavaScript (basics)</span>
+                                        <span>35%</span>
                                     </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="skill-category">
-                            <h3>Frameworks & Libraries</h3>
-                            <ul class="skill-list">
-                                <li>
-                                    Django
-                                    <div class="skill-bar">
-                                        <div class="skill-level" style="width: 80%;"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    Flask
-                                    <div class="skill-bar">
-                                        <div class="skill-level" style="width: 75%;"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    Pandas
-                                    <div class="skill-bar">
-                                        <div class="skill-level" style="width: 30%;"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    React.js (learning)
-                                    <div class="skill-bar">
-                                        <div class="skill-level" style="width: 30%;"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    Bootstrap
-                                    <div class="skill-bar">
-                                        <div class="skill-level" style="width: 60%;"></div>
+                                    <div class="w-full bg-dark-highlight rounded-full h-2">
+                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="35%"></div>
                                     </div>
                                 </li>
                             </ul>
                         </div>
 
-                        <div class="skill-category">
-                            <h3>Web Technologies</h3>
-                            <ul class="skill-list">
+                        <div class="bg-dark-card p-5 rounded-lg shadow-lg">
+                            <h3 class="text-xl text-accent mb-4">Frameworks & Libraries</h3>
+                            <ul class="space-y-4">
                                 <li>
-                                    HTML5
-                                    <div class="skill-bar">
-                                        <div class="skill-level" style="width: 70%;"></div>
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span>Django</span>
+                                        <span>80%</span>
+                                    </div>
+                                    <div class="w-full bg-dark-highlight rounded-full h-2">
+                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="80%"></div>
                                     </div>
                                 </li>
                                 <li>
-                                    CSS
-                                    <div class="skill-bar">
-                                        <div class="skill-level" style="width: 65%;"></div>
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span>Flask</span>
+                                        <span>75%</span>
+                                    </div>
+                                    <div class="w-full bg-dark-highlight rounded-full h-2">
+                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="75%"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span>React.js (learning)</span>
+                                        <span>45%</span>
+                                    </div>
+                                    <div class="w-full bg-dark-highlight rounded-full h-2">
+                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="45%"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span>Bootstrap</span>
+                                        <span>80%</span>
+                                    </div>
+                                    <div class="w-full bg-dark-highlight rounded-full h-2">
+                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="80%"></div>
                                     </div>
                                 </li>
                             </ul>
                         </div>
 
-                        <div class="skill-category">
-                            <h3>Version Control</h3>
-                            <ul class="skill-list">
+                        <div class="bg-dark-card p-5 rounded-lg shadow-lg">
+                            <h3 class="text-xl text-accent mb-4">Web Technologies</h3>
+                            <ul class="space-y-4">
                                 <li>
-                                    GitHub
-                                    <div class="skill-bar">
-                                        <div class="skill-level" style="width: 65%;"></div>
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span>HTML5</span>
+                                        <span>65%</span>
+                                    </div>
+                                    <div class="w-full bg-dark-highlight rounded-full h-2">
+                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="65%"></div>
+                                    </div>
+                                </li>
+                                <li>
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span>CSS</span>
+                                        <span>60%</span>
+                                    </div>
+                                    <div class="w-full bg-dark-highlight rounded-full h-2">
+                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="60%"></div>
                                     </div>
                                 </li>
                             </ul>
                         </div>
 
-                        <div class="skill-category">
-                            <h3>Cybersecurity</h3>
-                            <ul class="skill-list">
+                        <div class="bg-dark-card p-5 rounded-lg shadow-lg">
+                            <h3 class="text-xl text-accent mb-4">Version Control</h3>
+                            <ul class="space-y-4">
                                 <li>
-                                    Malware Development (Educational)
-                                    <div class="skill-bar">
-                                        <div class="skill-level" style="width: 70%;"></div>
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span>GitHub</span>
+                                        <span>60%</span>
+                                    </div>
+                                    <div class="w-full bg-dark-highlight rounded-full h-2">
+                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="60%"></div>
                                     </div>
                                 </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-dark-card p-5 rounded-lg shadow-lg">
+                            <h3 class="text-xl text-accent mb-4">Cybersecurity</h3>
+                            <ul class="space-y-4">
                                 <li>
-                                    Phishing Awareness
-                                    <div class="skill-bar">
-                                        <div class="skill-level" style="width: 75%;"></div>
+                                    <div class="flex items-center justify-between mb-1">
+                                        <span>Malware Development (Educational)</span>
+                                        <span>70%</span>
+                                    </div>
+                                    <div class="w-full bg-dark-highlight rounded-full h-2">
+                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="70%"></div>
                                     </div>
                                 </li>
                             </ul>
@@ -514,194 +219,226 @@
                 </div>
             </div>
 
-            <div id="projects" class="tab-content">
-                <div class="section">
-                    <h2 class="section-title">Projects</h2>
-                    <div class="projects-grid">
-                        <div class="project-card">
-                            <div class="project-header">
-                                <h3>EBomber</h3>
+            <div id="projects" class="tab-content hidden">
+                <div class="mb-8">
+                    <h2 class="text-2xl text-secondary mb-4 border-b border-secondary pb-2">Projects</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <div class="bg-dark-card rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                            <div class="bg-primary p-4">
+                                <h3 class="text-lg font-semibold">Email Breach Checker</h3>
                             </div>
-                            <div class="project-body">
-                                <p>An educational tool designed to demonstrate automated emailing and SMTP configurations.</p>
-                                <div class="project-tech">
-                                    <span class="tech-tag">Python</span>
-                                    <span class="tech-tag">SMTP</span>
+                            <div class="p-4">
+                                <p>An educational tool that uses a public API to check if an email has been exposed in known data breaches.</p>
+                                <div class="flex flex-wrap gap-2 mt-3">
+                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">Python</span>
+                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">SMTP</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="project-card">
-                            <div class="project-header">
-                                <h3>Phisher</h3>
+                        <div class="bg-dark-card rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                            <div class="bg-primary p-4">
+                                <h3 class="text-lg font-semibold">Banking System</h3>
                             </div>
-                            <div class="project-body">
-                                <p>A Python-based phishing tool developed for educational purposes to raise awareness about cybersecurity threats.</p>
-                                <div class="project-tech">
-                                    <span class="tech-tag">Python</span>
-                                    <span class="tech-tag">Cybersecurity</span>
+                            <div class="p-4">
+                                <p>A C-based console banking system supporting account creation, login, deposits, withdrawals, and data storage using binary files. Built to demonstrate file handling, user management, user session management and structured programming.</p>
+                                <div class="flex flex-wrap gap-2 mt-3">
+                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">C</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="project-card">
-                            <div class="project-header">
-                                <h3>Compressing</h3>
+                        <div class="bg-dark-card rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                            <div class="bg-primary p-4">
+                                <h3 class="text-lg font-semibold">Compressing</h3>
                             </div>
-                            <div class="project-body">
+                            <div class="p-4">
                                 <p>A Python project focused on developing a file compressor.</p>
-                                <div class="project-tech">
-                                    <span class="tech-tag">Python</span>
-                                    <span class="tech-tag">File Handling</span>
+                                <div class="flex flex-wrap gap-2 mt-3">
+                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">Python</span>
+                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">File Handling</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="project-card">
-                            <div class="project-header">
-                                <h3>Keylogger</h3>
+                        <div class="bg-dark-card rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                            <div class="bg-primary p-4">
+                                <h3 class="text-lg font-semibold">Reverse Shell Backdoor</h3>
                             </div>
-                            <div class="project-body">
-                                <p>A Python-based keylogger created for educational purposes to understand keystroke logging mechanisms.</p>
-                                <div class="project-tech">
-                                    <span class="tech-tag">Python</span>
-                                    <span class="tech-tag">Cybersecurity</span>
+                            <div class="p-4">
+                                <p>An advanced Python reverse shell backdoor for cybersecurity research, featuring persistence, Telegram-based C2 control, remote command execution, file transfer, screenshot/webcam capture, and payload delivery — built to simulate real-world post-exploitation in lab environments.</p>
+                                <div class="flex flex-wrap gap-2 mt-3">
+                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">Python</span>
+                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">Cybersecurity</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="project-card">
-                            <div class="project-header">
-                                <h3>Django Chat App</h3>
+                        <div class="bg-dark-card rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                            <div class="bg-primary p-4">
+                                <h3 class="text-lg font-semibold">Django Chat App</h3>
                             </div>
-                            <div class="project-body">
+                            <div class="p-4">
                                 <p>A chat application built using the Django framework.</p>
-                                <div class="project-tech">
-                                    <span class="tech-tag">Django</span>
-                                    <span class="tech-tag">Python</span>
-                                    <span class="tech-tag">WebSockets</span>
+                                <div class="flex flex-wrap gap-2 mt-3">
+                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">Django</span>
+                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">Python</span>
+                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">WebSockets</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="project-card">
-                            <div class="project-header">
-                                <h3>Auto Send Email in Django</h3>
+                        <div class="bg-dark-card rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                            <div class="bg-primary p-4">
+                                <h3 class="text-lg font-semibold">Auto Send Email in Django</h3>
                             </div>
-                            <div class="project-body">
+                            <div class="p-4">
                                 <p>A project demonstrating automated email sending functionality within a Django application.</p>
-                                <div class="project-tech">
-                                    <span class="tech-tag">Django</span>
-                                    <span class="tech-tag">Python</span>
-                                    <span class="tech-tag">SMTP</span>
+                                <div class="flex flex-wrap gap-2 mt-3">
+                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">Django</span>
+                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">Python</span>
+                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">SMTP</span>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="project-card">
-                            <div class="project-header">
-                                <h3>Bots-Python</h3>
+                        <div class="bg-dark-card rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
+                            <div class="bg-primary p-4">
+                                <h3 class="text-lg font-semibold">Many More...</h3>
                             </div>
-                            <div class="project-body">
-                                <p>A collection of bots developed using Python.</p>
-                                <div class="project-tech">
-                                    <span class="tech-tag">Python</span>
-                                    <span class="tech-tag">Automation</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="project-card">
-                            <div class="project-header">
-                                <h3>Many More...</h3>
-                            </div>
-                            <div class="project-body">
-                                <p>Github:-</p><a href="https://github.com/Arp1it">Arp1it (Echo Cipher)</a>
+                            <div class="p-4">
+                                <p class="mb-2">Github:</p>
+                                <a href="https://github.com/Arp1it" class="text-accent hover:underline">Arp1it (Echo Cipher)</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div id="contact" class="tab-content">
-                <div class="section">
-                    <h2 class="section-title">Get In Touch</h2>
-                    <div class="contact-info">
+            <div id="contact" class="tab-content hidden">
+                <div class="mb-8">
+                    <h2 class="text-2xl text-secondary mb-4 border-b border-secondary pb-2">Get In Touch</h2>
+                    <div class="bg-dark-card p-5 rounded-lg text-center shadow-lg">
                         <p>Feel free to reach out to me on GitHub or check out my blog for Python tutorials and insights.</p>
-                        <div class="contact-links">
-                            <a href="https://github.com/Arp1it" target="_blank" class="contact-link">GitHub</a>
-                            <a href="https://python23j.blogspot.com" target="_blank" class="contact-link">Blog</a>
+                        <div class="flex justify-center gap-5 mt-5">
+                            <a href="https://github.com/Arp1it" target="_blank" class="bg-primary text-white px-5 py-3 rounded hover:bg-secondary transition-colors duration-300">GitHub</a>
+                            <a href="https://python23j.blogspot.com" target="_blank" class="bg-primary text-white px-5 py-3 rounded hover:bg-secondary transition-colors duration-300">Blog</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
 
-        <footer>
+        <footer class="text-center mt-10 pt-5 border-t border-secondary">
             <p>&copy; 2025 Arpit (Echo Cipher). All rights reserved.</p>
         </footer>
     </div>
 
     <script>
-        // Tab switching functionality
         document.addEventListener('DOMContentLoaded', function() {
             const tabs = document.querySelectorAll('.tab');
             const tabContents = document.querySelectorAll('.tab-content');
+            const themeToggle = document.getElementById('themeToggle');
+            const body = document.body;
             
+            // Tab switching functionality
             tabs.forEach(tab => {
                 tab.addEventListener('click', function() {
                     // Remove active class from all tabs and contents
-                    tabs.forEach(t => t.classList.remove('active'));
-                    tabContents.forEach(content => content.classList.remove('active'));
+                    tabs.forEach(t => {
+                        t.classList.remove('active');
+                        t.classList.remove('bg-secondary');
+                        t.classList.add('bg-dark-card');
+                    });
+                    
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        content.classList.add('hidden');
+                    });
                     
                     // Add active class to clicked tab
                     this.classList.add('active');
+                    this.classList.add('bg-secondary');
+                    this.classList.remove('bg-dark-card');
                     
                     // Show corresponding content
                     const tabId = this.getAttribute('data-tab');
-                    document.getElementById(tabId).classList.add('active');
+                    const activeContent = document.getElementById(tabId);
+                    activeContent.classList.add('active');
+                    activeContent.classList.remove('hidden');
+                    
+                    // Animate skill bars if skills tab is active
+                    if (tabId === 'skills') {
+                        animateSkillBars();
+                    }
                 });
             });
             
             // Theme toggle functionality
-            const themeToggle = document.getElementById('themeToggle');
-            const body = document.body;
-            
             themeToggle.addEventListener('click', function() {
-                body.classList.toggle('light-mode');
-                
-                if (body.classList.contains('light-mode')) {
+                if (body.classList.contains('bg-dark-bg')) {
+                    // Switch to light mode
+                    body.classList.remove('bg-dark-bg');
+                    body.classList.remove('text-gray-100');
+                    body.classList.add('bg-gray-100');
+                    body.classList.add('text-gray-800');
+                    
+                    // Update cards
+                    document.querySelectorAll('.bg-dark-card').forEach(el => {
+                        if (!el.classList.contains('active')) {
+                            el.classList.remove('bg-dark-card');
+                            el.classList.add('bg-white');
+                        }
+                    });
+                    
+                    // Update skill bars background
+                    document.querySelectorAll('.bg-dark-highlight').forEach(el => {
+                        el.classList.remove('bg-dark-highlight');
+                        el.classList.add('bg-gray-200');
+                    });
+                    
                     themeToggle.textContent = 'Dark Mode';
                 } else {
+                    // Switch to dark mode
+                    body.classList.add('bg-dark-bg');
+                    body.classList.add('text-gray-100');
+                    body.classList.remove('bg-gray-100');
+                    body.classList.remove('text-gray-800');
+                    
+                    // Update cards
+                    document.querySelectorAll('.bg-white').forEach(el => {
+                        if (!el.classList.contains('active')) {
+                            el.classList.add('bg-dark-card');
+                            el.classList.remove('bg-white');
+                        }
+                    });
+                    
+                    // Update skill bars background
+                    document.querySelectorAll('.bg-gray-200').forEach(el => {
+                        el.classList.add('bg-dark-highlight');
+                        el.classList.remove('bg-gray-200');
+                    });
+                    
                     themeToggle.textContent = 'Light Mode';
                 }
             });
-
-            // Animate skill bars on load
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const skillBars = entry.target.querySelectorAll('.skill-level');
-                        skillBars.forEach(bar => {
-                            const width = bar.style.width;
-                            bar.style.width = '0';
-                            setTimeout(() => {
-                                bar.style.transition = 'width 1s ease-in-out';
-                                bar.style.width = width;
-                            }, 100);
-                        });
-                        observer.unobserve(entry.target);
-                    }
+            
+            // Animate skill bars function
+            function animateSkillBars() {
+                const skillBars = document.querySelectorAll('.skill-level');
+                skillBars.forEach(bar => {
+                    const width = bar.getAttribute('data-width');
+                    bar.style.width = '0';
+                    setTimeout(() => {
+                        bar.style.transition = 'width 1s ease-in-out';
+                        bar.style.width = width;
+                    }, 100);
                 });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.skill-category').forEach(category => {
-                observer.observe(category);
-            });
-
+            }
+            
             // Type writer effect for profile title
-            const profileTitle = document.querySelector('.profile h1');
-            const originalText = profileTitle.textContent;
+            const profileTitle = document.getElementById('profileTitle');
+            const originalText = "Arpit (Echo Cipher)";
             profileTitle.textContent = '';
             
             let i = 0;
@@ -714,6 +451,42 @@
             }
             
             setTimeout(typeWriter, 500);
+            
+            // Initialize the first tab's content
+            animateSkillBars();
+            
+            // Initialize intersection observer for animations on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Trigger animations when element comes into view
+                        if (entry.target.classList.contains('skill-category')) {
+                            const skillBars = entry.target.querySelectorAll('.skill-level');
+                            animateSkillBars(skillBars);
+                        }
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            // Observe all skill categories
+            document.querySelectorAll('.skill-category').forEach(category => {
+                observer.observe(category);
+            });
+            
+            // Add floating animation to project cards
+            const projectCards = document.querySelectorAll('.projects-grid .project-card');
+            projectCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.style.transform = 'translateY(-10px)';
+                    card.style.boxShadow = '0 10px 20px rgba(0,0,0,0.2)';
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = 'translateY(0)';
+                    card.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
+                });
+            });
         });
     </script>
 </body>

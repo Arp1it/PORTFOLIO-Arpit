@@ -3,491 +3,681 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/png" href="resu.png">
-    <title>Arpit (Echo Cipher) - Resume</title>
+    <title>Arpit (Echo Cipher) - Portfolio</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#2a2a72',
-                        secondary: '#009688',
-                        accent: '#ff5722',
-                        dark: {
-                            bg: '#121212',
-                            card: '#1e1e1e',
-                            highlight: '#2d2d2d'
-                        },
-                        light: {
-                            bg: '#f5f5f5',
-                            card: '#ffffff'
-                        }
-                    }
-                }
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+        }
+
+        .dark-mode {
+            background: #0a0a0a;
+            color: #fff;
+        }
+
+        .light-mode {
+            background: #ffffff;
+            color: #000;
+        }
+
+        .hero-section {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .floating-shapes {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .shape {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 20s infinite ease-in-out;
+        }
+
+        .shape1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(45deg, #00ff87, #60efff);
+            border-radius: 50%;
+            top: -100px;
+            left: -100px;
+            animation-delay: 0s;
+        }
+
+        .shape2 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(45deg, #ff0080, #ff8c00);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            bottom: -50px;
+            right: -50px;
+            animation-delay: 7s;
+        }
+
+        .shape3 {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(45deg, #7928ca, #ff0080);
+            border-radius: 50%;
+            top: 50%;
+            right: 10%;
+            animation-delay: 14s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            background: linear-gradient(135deg, #00ff87, #60efff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: bold;
+            box-shadow: 0 20px 60px rgba(96, 239, 255, 0.3);
+            position: relative;
+            z-index: 1;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .light-mode .card {
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .light-mode .card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .tab-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: 12px;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            color: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .light-mode .tab-button {
+            border: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: #60efff;
+        }
+
+        .light-mode .tab-button:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, #00ff87, #60efff);
+            border-color: transparent;
+            color: #000;
+        }
+
+        .skill-bar-bg {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .light-mode .skill-bar-bg {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .skill-bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .light-mode .project-card {
+            background: rgba(0, 0, 0, 0.02);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-header {
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 255, 135, 0.1), rgba(96, 239, 255, 0.1));
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            margin-right: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .light-mode .tag {
+            background: rgba(0, 0, 0, 0.08);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #00ff87, #60efff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1) rotate(180deg);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .about-item {
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 15px;
+            border-left: 3px solid #00ff87;
+            transition: all 0.3s ease;
+        }
+
+        .light-mode .about-item {
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        .about-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(10px);
+        }
+
+        .light-mode .about-item:hover {
+            background: rgba(0, 0, 0, 0.05);
+        }
+
+        .link-button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .link-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+            }
+            .theme-toggle {
+                width: 50px;
+                height: 50px;
+                top: 1rem;
+                right: 1rem;
+            }
+            .hero-section h1 {
+                font-size: 2rem !important;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
             }
         }
-    </script>
+    </style>
 </head>
-<body class="bg-dark-bg text-gray-100 transition-colors duration-300" x-data="{ darkMode: true }">
-    <div class="max-w-6xl mx-auto p-5">
-        <header class="flex justify-between items-center py-5 border-b-2 border-secondary mb-8">
-            <h2 class="text-xl font-semibold">My Portfolio</h2>
-            <button id="themeToggle" class="bg-primary text-white py-2 px-4 rounded-full font-bold hover:bg-secondary transition-colors duration-300">Toggle Theme</button>
-        </header>
+<body class="dark-mode">
+    <button class="theme-toggle" id="themeToggle">🌙</button>
 
-        <section class="text-center mb-10">
-            <div class="w-32 h-32 rounded-full bg-primary mx-auto mb-5 flex justify-center items-center text-4xl text-white">AC</div>
-            <h1 id="profileTitle" class="text-4xl font-bold text-secondary mb-2"></h1>
-            <p class="text-lg italic mb-5 text-gray-300 dark:text-gray-300 light:text-gray-700">Passionate Python Developer with a focus on Cybersecurity and Software Development</p>
-        </section>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="floating-shapes">
+            <div class="shape shape1"></div>
+            <div class="shape shape2"></div>
+            <div class="shape shape3"></div>
+        </div>
+        <div style="text-align: center; position: relative; z-index: 1;">
+            <div class="profile-image" style="margin: 0 auto 2rem;">AC</div>
+            <h1 style="font-size: 3rem; font-weight: 800; margin-bottom: 1rem;" id="nameTyping"></h1>
+            <p style="font-size: 1.25rem; opacity: 0.8; max-width: 600px; margin: 0 auto;">
+                Passionate Python Developer specializing in Cybersecurity and Software Development
+            </p>
+        </div>
+    </section>
 
-        <div class="mb-10">
-            <div class="flex justify-center mb-5 flex-wrap">
-                <button class="tab bg-dark-card text-white py-2 px-4 m-1 rounded cursor-pointer transition-colors duration-300 active" data-tab="about">About Me</button>
-                <button class="tab bg-dark-card text-white py-2 px-4 m-1 rounded cursor-pointer transition-colors duration-300" data-tab="skills">Skills</button>
-                <button class="tab bg-dark-card text-white py-2 px-4 m-1 rounded cursor-pointer transition-colors duration-300" data-tab="projects">Projects</button>
-                <button class="tab bg-dark-card text-white py-2 px-4 m-1 rounded cursor-pointer transition-colors duration-300" data-tab="contact">Contact</button>
+    <!-- Navigation Tabs -->
+    <div style="text-align: center; margin-bottom: 3rem;">
+        <button class="tab-button active" data-tab="about">About</button>
+        <button class="tab-button" data-tab="skills">Skills</button>
+        <button class="tab-button" data-tab="projects">Projects</button>
+        <button class="tab-button" data-tab="contact">Contact</button>
+    </div>
+
+    <!-- About Section -->
+    <div class="content-section tab-content" id="about">
+        <h2 class="section-title"><span class="gradient-text">About Me</span></h2>
+        <div class="about-grid">
+            <div class="about-item">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🐍</div>
+                <p>Primarily a Python programmer, currently working with Django framework</p>
             </div>
-
-            <div id="about" class="tab-content active">
-                <div class="mb-8">
-                    <h2 class="text-2xl text-secondary mb-4 border-b border-secondary pb-2">About Me</h2>
-                    <div class="bg-dark-card p-5 rounded-lg mb-5 shadow-lg">
-                        <ul class="space-y-3">
-                            <li class="pl-6 relative"><span class="absolute left-0 text-accent">•</span> Primarily a Python programmer, currently working with the Django framework.</li>
-                            <li class="pl-6 relative"><span class="absolute left-0 text-accent">•</span> Learning C and React.js.</li>
-                            <li class="pl-6 relative"><span class="absolute left-0 text-accent">•</span> Familiar with JavaScript (basics), Bootstrap, and HTML5.</li>
-                            <li class="pl-6 relative"><span class="absolute left-0 text-accent">•</span> Experienced with Flask, Pandas, and various other Python frameworks.</li>
-                            <li class="pl-6 relative"><span class="absolute left-0 text-accent">•</span> Knowledgeable in basic version control using GitHub.</li>
-                            <li class="pl-6 relative"><span class="absolute left-0 text-accent">•</span> Explored malware development over the past few months.</li>
-                            <li class="pl-6 relative"><span class="absolute left-0 text-accent">•</span> Passionate about Cybersecurity, AI, and Software Development.</li>
-                            <li class="pl-6 relative"><span class="absolute left-0 text-accent">•</span> Always learning and exploring new technologies.</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="mb-8">
-                    <h2 class="text-2xl text-secondary mb-4 border-b border-secondary pb-2">Education</h2>
-                    <div class="bg-dark-card p-5 rounded-lg mb-5 shadow-lg">
-                        <p>Continuously learning and exploring new technologies, with a focus on programming, cybersecurity, and software development.</p>
-                    </div>
-                </div>
-
-                <div class="mb-8">
-                    <h2 class="text-2xl text-secondary mb-4 border-b border-secondary pb-2">Blog</h2>
-                    <div class="bg-dark-card p-5 rounded-lg mb-5 shadow-lg">
-                        <p>Python23j: A blog where I share insights and tutorials related to Python programming.</p>
-                        <p class="mt-2">Visit: <a href="https://python23j.blogspot.com" target="_blank" class="text-accent hover:underline">python23j.blogspot.com</a></p>
-                    </div>
-                </div>
+            <div class="about-item">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">📚</div>
+                <p>Learning C and React.js to expand my skill set</p>
             </div>
+            <div class="about-item">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">💻</div>
+                <p>Familiar with JavaScript, Bootstrap, and HTML5</p>
+            </div>
+            <div class="about-item">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔧</div>
+                <p>Experienced with Flask, Pandas, and various Python frameworks</p>
+            </div>
+            <div class="about-item">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">📦</div>
+                <p>Knowledgeable in version control using GitHub</p>
+            </div>
+            <div class="about-item">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🛡️</div>
+                <p>Explored malware development for educational purposes</p>
+            </div>
+            <div class="about-item">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🔐</div>
+                <p>Passionate about Cybersecurity, AI, and Software Development</p>
+            </div>
+            <div class="about-item">
+                <div style="font-size: 2rem; margin-bottom: 0.5rem;">🚀</div>
+                <p>Always learning and exploring new technologies</p>
+            </div>
+        </div>
 
-            <div id="skills" class="tab-content hidden">
-                <div class="mb-8">
-                    <h2 class="text-2xl text-secondary mb-4 border-b border-secondary pb-2">Technical Skills</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-                        <div class="bg-dark-card p-5 rounded-lg shadow-lg">
-                            <h3 class="text-xl text-accent mb-4">Programming Languages</h3>
-                            <ul class="space-y-4">
-                                <li>
-                                    <div class="flex items-center justify-between mb-1">
-                                        <span>Python</span>
-                                        <span>90%</span>
-                                    </div>
-                                    <div class="w-full bg-dark-highlight rounded-full h-2">
-                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="90%"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="flex items-center justify-between mb-1">
-                                        <span>C (learning)</span>
-                                        <span>40%</span>
-                                    </div>
-                                    <div class="w-full bg-dark-highlight rounded-full h-2">
-                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="40%"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="flex items-center justify-between mb-1">
-                                        <span>JavaScript (basics)</span>
-                                        <span>35%</span>
-                                    </div>
-                                    <div class="w-full bg-dark-highlight rounded-full h-2">
-                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="35%"></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+        <div style="margin-top: 4rem;">
+            <div class="card" style="margin-bottom: 2rem;">
+                <h3 class="gradient-text" style="font-size: 1.75rem; margin-bottom: 1rem;">Education</h3>
+                <p style="opacity: 0.8;">Continuously learning and exploring new technologies, with a focus on programming, cybersecurity, and software development.</p>
+            </div>
+            <div class="card">
+                <h3 class="gradient-text" style="font-size: 1.75rem; margin-bottom: 1rem;">Blog</h3>
+                <p style="opacity: 0.8; margin-bottom: 1rem;">Python23j: A blog where I share insights and tutorials related to Python programming.</p>
+                <a href="https://python23j.blogspot.com" target="_blank" style="display: inline-block; padding: 0.75rem 1.5rem; background: linear-gradient(135deg, #00ff87, #60efff); color: #000; border-radius: 10px; text-decoration: none; font-weight: 600;">Visit Blog →</a>
+            </div>
+        </div>
+    </div>
 
-                        <div class="bg-dark-card p-5 rounded-lg shadow-lg">
-                            <h3 class="text-xl text-accent mb-4">Frameworks & Libraries</h3>
-                            <ul class="space-y-4">
-                                <li>
-                                    <div class="flex items-center justify-between mb-1">
-                                        <span>Django</span>
-                                        <span>80%</span>
-                                    </div>
-                                    <div class="w-full bg-dark-highlight rounded-full h-2">
-                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="80%"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="flex items-center justify-between mb-1">
-                                        <span>Flask</span>
-                                        <span>75%</span>
-                                    </div>
-                                    <div class="w-full bg-dark-highlight rounded-full h-2">
-                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="75%"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="flex items-center justify-between mb-1">
-                                        <span>React.js (learning)</span>
-                                        <span>45%</span>
-                                    </div>
-                                    <div class="w-full bg-dark-highlight rounded-full h-2">
-                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="45%"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="flex items-center justify-between mb-1">
-                                        <span>Bootstrap</span>
-                                        <span>80%</span>
-                                    </div>
-                                    <div class="w-full bg-dark-highlight rounded-full h-2">
-                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="80%"></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="bg-dark-card p-5 rounded-lg shadow-lg">
-                            <h3 class="text-xl text-accent mb-4">Web Technologies</h3>
-                            <ul class="space-y-4">
-                                <li>
-                                    <div class="flex items-center justify-between mb-1">
-                                        <span>HTML5</span>
-                                        <span>65%</span>
-                                    </div>
-                                    <div class="w-full bg-dark-highlight rounded-full h-2">
-                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="65%"></div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="flex items-center justify-between mb-1">
-                                        <span>CSS</span>
-                                        <span>60%</span>
-                                    </div>
-                                    <div class="w-full bg-dark-highlight rounded-full h-2">
-                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="60%"></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="bg-dark-card p-5 rounded-lg shadow-lg">
-                            <h3 class="text-xl text-accent mb-4">Version Control</h3>
-                            <ul class="space-y-4">
-                                <li>
-                                    <div class="flex items-center justify-between mb-1">
-                                        <span>GitHub</span>
-                                        <span>60%</span>
-                                    </div>
-                                    <div class="w-full bg-dark-highlight rounded-full h-2">
-                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="60%"></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="bg-dark-card p-5 rounded-lg shadow-lg">
-                            <h3 class="text-xl text-accent mb-4">Cybersecurity</h3>
-                            <ul class="space-y-4">
-                                <li>
-                                    <div class="flex items-center justify-between mb-1">
-                                        <span>Malware Development (Educational)</span>
-                                        <span>70%</span>
-                                    </div>
-                                    <div class="w-full bg-dark-highlight rounded-full h-2">
-                                        <div class="skill-level bg-accent h-2 rounded-full" style="width: 0%" data-width="70%"></div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
+    <!-- Skills Section -->
+    <div class="content-section tab-content" id="skills" style="display: none;">
+        <h2 class="section-title"><span class="gradient-text">Skills & Expertise</span></h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 2rem;">
+            <div class="card">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Programming Languages</h3>
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Python</span>
+                        <span>90%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" style="width: 0%; background: linear-gradient(90deg, #00ff87, #60efff);" data-width="90"></div>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>C (learning)</span>
+                        <span>40%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" style="width: 0%; background: linear-gradient(90deg, #7928ca, #ff0080);" data-width="40"></div>
+                    </div>
+                </div>
+                <div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>JavaScript</span>
+                        <span>35%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" style="width: 0%; background: linear-gradient(90deg, #f7971e, #ffd200);" data-width="35"></div>
                     </div>
                 </div>
             </div>
 
-            <div id="projects" class="tab-content hidden">
-                <div class="mb-8">
-                    <h2 class="text-2xl text-secondary mb-4 border-b border-secondary pb-2">Projects</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                        <div class="bg-dark-card rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-                            <div class="bg-primary p-4">
-                                <h3 class="text-lg font-semibold">Email Breach Checker</h3>
-                            </div>
-                            <div class="p-4">
-                                <p>An educational tool that uses a public API to check if an email has been exposed in known data breaches.</p>
-                                <div class="flex flex-wrap gap-2 mt-3">
-                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">Python</span>
-                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">SMTP</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-dark-card rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-                            <div class="bg-primary p-4">
-                                <h3 class="text-lg font-semibold">Banking System</h3>
-                            </div>
-                            <div class="p-4">
-                                <p>A C-based console banking system supporting account creation, login, deposits, withdrawals, and data storage using binary files. Built to demonstrate file handling, user management, user session management and structured programming.</p>
-                                <div class="flex flex-wrap gap-2 mt-3">
-                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">C</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-dark-card rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-                            <div class="bg-primary p-4">
-                                <h3 class="text-lg font-semibold">Compressing</h3>
-                            </div>
-                            <div class="p-4">
-                                <p>A Python project focused on developing a file compressor.</p>
-                                <div class="flex flex-wrap gap-2 mt-3">
-                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">Python</span>
-                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">File Handling</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-dark-card rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-                            <div class="bg-primary p-4">
-                                <h3 class="text-lg font-semibold">Reverse Shell Backdoor</h3>
-                            </div>
-                            <div class="p-4">
-                                <p>An advanced Python reverse shell backdoor for cybersecurity research, featuring persistence, Telegram-based C2 control, remote command execution, file transfer, screenshot/webcam capture, and payload delivery — built to simulate real-world post-exploitation in lab environments.</p>
-                                <div class="flex flex-wrap gap-2 mt-3">
-                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">Python</span>
-                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">Cybersecurity</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-dark-card rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-                            <div class="bg-primary p-4">
-                                <h3 class="text-lg font-semibold">Django Chat App</h3>
-                            </div>
-                            <div class="p-4">
-                                <p>A chat application built using the Django framework.</p>
-                                <div class="flex flex-wrap gap-2 mt-3">
-                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">Django</span>
-                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">Python</span>
-                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">WebSockets</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-dark-card rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-                            <div class="bg-primary p-4">
-                                <h3 class="text-lg font-semibold">Auto Send Email in Django</h3>
-                            </div>
-                            <div class="p-4">
-                                <p>A project demonstrating automated email sending functionality within a Django application.</p>
-                                <div class="flex flex-wrap gap-2 mt-3">
-                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">Django</span>
-                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">Python</span>
-                                    <span class="bg-secondary text-white px-2 py-1 rounded-full text-xs">SMTP</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="bg-dark-card rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:-translate-y-2 hover:shadow-xl">
-                            <div class="bg-primary p-4">
-                                <h3 class="text-lg font-semibold">Many More...</h3>
-                            </div>
-                            <div class="p-4">
-                                <p class="mb-2">Github:</p>
-                                <a href="https://github.com/Arp1it" class="text-accent hover:underline">Arp1it (Echo Cipher)</a>
-                            </div>
-                        </div>
+            <div class="card">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Frameworks & Libraries</h3>
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Django</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" style="width: 0%; background: linear-gradient(90deg, #0ba360, #3cba92);" data-width="80"></div>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Flask</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" style="width: 0%; background: linear-gradient(90deg, #00c6ff, #0072ff);" data-width="75"></div>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>React.js (learning)</span>
+                        <span>45%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" style="width: 0%; background: linear-gradient(90deg, #61dafb, #21a1c4);" data-width="45"></div>
+                    </div>
+                </div>
+                <div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Bootstrap</span>
+                        <span>80%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" style="width: 0%; background: linear-gradient(90deg, #563d7c, #7952b3);" data-width="80"></div>
                     </div>
                 </div>
             </div>
 
-            <div id="contact" class="tab-content hidden">
-                <div class="mb-8">
-                    <h2 class="text-2xl text-secondary mb-4 border-b border-secondary pb-2">Get In Touch</h2>
-                    <div class="bg-dark-card p-5 rounded-lg text-center shadow-lg">
-                        <p>Feel free to reach out to me on GitHub or check out my blog for Python tutorials and insights.</p>
-                        <div class="flex justify-center gap-5 mt-5">
-                            <a href="https://github.com/Arp1it" target="_blank" class="bg-primary text-white px-5 py-3 rounded hover:bg-secondary transition-colors duration-300">GitHub</a>
-                            <a href="https://python23j.blogspot.com" target="_blank" class="bg-primary text-white px-5 py-3 rounded hover:bg-secondary transition-colors duration-300">Blog</a>
-                        </div>
+            <div class="card">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Web Technologies</h3>
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>HTML5</span>
+                        <span>65%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" style="width: 0%; background: linear-gradient(90deg, #e44d26, #f16529);" data-width="65"></div>
+                    </div>
+                </div>
+                <div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>CSS</span>
+                        <span>60%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" style="width: 0%; background: linear-gradient(90deg, #264de4, #2965f1);" data-width="60"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 style="font-size: 1.5rem; margin-bottom: 1.5rem;">Other Skills</h3>
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>GitHub</span>
+                        <span>60%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" style="width: 0%; background: linear-gradient(90deg, #333, #666);" data-width="60"></div>
+                    </div>
+                </div>
+                <div>
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span>Malware Development</span>
+                        <span>70%</span>
+                    </div>
+                    <div class="skill-bar-bg">
+                        <div class="skill-bar-fill" style="width: 0%; background: linear-gradient(90deg, #ff0080, #ff8c00);" data-width="70"></div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <footer class="text-center mt-10 pt-5 border-t border-secondary">
-            <p>&copy; 2025 Arpit (Echo Cipher). All rights reserved.</p>
-        </footer>
     </div>
 
+    <!-- Projects Section -->
+    <div class="content-section tab-content" id="projects" style="display: none;">
+        <h2 class="section-title"><span class="gradient-text">Featured Projects</span></h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 2rem;">
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 style="font-size: 1.25rem; font-weight: 700;">Email Breach Checker</h3>
+                </div>
+                <div style="padding: 1.5rem;">
+                    <p style="opacity: 0.8; margin-bottom: 1rem;">An educational tool that uses a public API to check if an email has been exposed in known data breaches.</p>
+                    <div>
+                        <span class="tag">Python</span>
+                        <span class="tag">SMTP</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 style="font-size: 1.25rem; font-weight: 700;">Banking System</h3>
+                </div>
+                <div style="padding: 1.5rem;">
+                    <p style="opacity: 0.8; margin-bottom: 1rem;">A C-based console banking system with account creation, login, deposits, withdrawals, and binary file storage.</p>
+                    <div>
+                        <span class="tag">C</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 style="font-size: 1.25rem; font-weight: 700;">File Compressor</h3>
+                </div>
+                <div style="padding: 1.5rem;">
+                    <p style="opacity: 0.8; margin-bottom: 1rem;">A Python project focused on developing an efficient file compression tool.</p>
+                    <div>
+                        <span class="tag">Python</span>
+                        <span class="tag">File Handling</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 style="font-size: 1.25rem; font-weight: 700;">Reverse Shell Backdoor</h3>
+                </div>
+                <div style="padding: 1.5rem;">
+                    <p style="opacity: 0.8; margin-bottom: 1rem;">Advanced Python reverse shell for cybersecurity research with persistence, Telegram C2, and remote execution capabilities.</p>
+                    <div>
+                        <span class="tag">Python</span>
+                        <span class="tag">Cybersecurity</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 style="font-size: 1.25rem; font-weight: 700;">Django Chat App</h3>
+                </div>
+                <div style="padding: 1.5rem;">
+                    <p style="opacity: 0.8; margin-bottom: 1rem;">Real-time chat application built using Django framework with WebSocket support.</p>
+                    <div>
+                        <span class="tag">Django</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">WebSockets</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 style="font-size: 1.25rem; font-weight: 700;">Auto Email System</h3>
+                </div>
+                <div style="padding: 1.5rem;">
+                    <p style="opacity: 0.8; margin-bottom: 1rem;">Automated email sending functionality within a Django application.</p>
+                    <div>
+                        <span class="tag">Django</span>
+                        <span class="tag">SMTP</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 style="font-size: 1.25rem; font-weight: 700;">More Projects</h3>
+                </div>
+                <div style="padding: 1.5rem;">
+                    <p style="opacity: 0.8; margin-bottom: 1rem;">Check out my GitHub for more projects and contributions!</p>
+                    <a href="https://github.com/Arp1it" target="_blank" style="display: inline-block; padding: 0.5rem 1rem; background: linear-gradient(135deg, #00ff87, #60efff); color: #000; border-radius: 8px; text-decoration: none; font-weight: 600;">Visit GitHub</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="content-section tab-content" id="contact" style="display: none;">
+        <h2 class="section-title"><span class="gradient-text">Get In Touch</span></h2>
+        <div class="card" style="max-width: 600px; margin: 0 auto; text-align: center;">
+            <p style="font-size: 1.25rem; opacity: 0.8; margin-bottom: 2rem;">Feel free to reach out to me on GitHub or check out my blog for Python tutorials and insights.</p>
+            <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                <a href="https://github.com/Arp1it" target="_blank" class="link-button" style="background: linear-gradient(135deg, #333, #666); color: #fff;">🐙 GitHub</a>
+                <a href="https://python23j.blogspot.com" target="_blank" class="link-button" style="background: linear-gradient(135deg, #ff6b6b, #ff8e53); color: #fff;">📝 Blog</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer style="text-align: center; padding: 3rem 2rem; opacity: 0.6;">
+        <p>&copy; 2025 Arpit (Echo Cipher). All rights reserved.</p>
+    </footer>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const tabs = document.querySelectorAll('.tab');
-            const tabContents = document.querySelectorAll('.tab-content');
-            const themeToggle = document.getElementById('themeToggle');
-            const body = document.body;
-            
-            // Tab switching functionality
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    // Remove active class from all tabs and contents
-                    tabs.forEach(t => {
-                        t.classList.remove('active');
-                        t.classList.remove('bg-secondary');
-                        t.classList.add('bg-dark-card');
-                    });
-                    
-                    tabContents.forEach(content => {
-                        content.classList.remove('active');
-                        content.classList.add('hidden');
-                    });
-                    
-                    // Add active class to clicked tab
-                    this.classList.add('active');
-                    this.classList.add('bg-secondary');
-                    this.classList.remove('bg-dark-card');
-                    
-                    // Show corresponding content
-                    const tabId = this.getAttribute('data-tab');
-                    const activeContent = document.getElementById(tabId);
-                    activeContent.classList.add('active');
-                    activeContent.classList.remove('hidden');
-                    
-                    // Animate skill bars if skills tab is active
-                    if (tabId === 'skills') {
-                        animateSkillBars();
-                    }
-                });
-            });
-            
-            // Theme toggle functionality
-            themeToggle.addEventListener('click', function() {
-                if (body.classList.contains('bg-dark-bg')) {
-                    // Switch to light mode
-                    body.classList.remove('bg-dark-bg');
-                    body.classList.remove('text-gray-100');
-                    body.classList.add('bg-gray-100');
-                    body.classList.add('text-gray-800');
-                    
-                    // Update cards
-                    document.querySelectorAll('.bg-dark-card').forEach(el => {
-                        if (!el.classList.contains('active')) {
-                            el.classList.remove('bg-dark-card');
-                            el.classList.add('bg-white');
-                        }
-                    });
-                    
-                    // Update skill bars background
-                    document.querySelectorAll('.bg-dark-highlight').forEach(el => {
-                        el.classList.remove('bg-dark-highlight');
-                        el.classList.add('bg-gray-200');
-                    });
-                    
-                    themeToggle.textContent = 'Dark Mode';
-                } else {
-                    // Switch to dark mode
-                    body.classList.add('bg-dark-bg');
-                    body.classList.add('text-gray-100');
-                    body.classList.remove('bg-gray-100');
-                    body.classList.remove('text-gray-800');
-                    
-                    // Update cards
-                    document.querySelectorAll('.bg-white').forEach(el => {
-                        if (!el.classList.contains('active')) {
-                            el.classList.add('bg-dark-card');
-                            el.classList.remove('bg-white');
-                        }
-                    });
-                    
-                    // Update skill bars background
-                    document.querySelectorAll('.bg-gray-200').forEach(el => {
-                        el.classList.add('bg-dark-highlight');
-                        el.classList.remove('bg-gray-200');
-                    });
-                    
-                    themeToggle.textContent = 'Light Mode';
-                }
-            });
-            
-            // Animate skill bars function
-            function animateSkillBars() {
-                const skillBars = document.querySelectorAll('.skill-level');
-                skillBars.forEach(bar => {
-                    const width = bar.getAttribute('data-width');
-                    bar.style.width = '0';
-                    setTimeout(() => {
-                        bar.style.transition = 'width 1s ease-in-out';
-                        bar.style.width = width;
-                    }, 100);
-                });
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
+        const tabs = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        themeToggle.addEventListener('click', () => {
+            if (body.classList.contains('dark-mode')) {
+                body.classList.remove('dark-mode');
+                body.classList.add('light-mode');
+                themeToggle.textContent = '☀️';
+            } else {
+                body.classList.add('dark-mode');
+                body.classList.remove('light-mode');
+                themeToggle.textContent = '🌙';
             }
-            
-            // Type writer effect for profile title
-            const profileTitle = document.getElementById('profileTitle');
-            const originalText = "Arpit (Echo Cipher)";
-            profileTitle.textContent = '';
-            
-            let i = 0;
-            function typeWriter() {
-                if (i < originalText.length) {
-                    profileTitle.textContent += originalText.charAt(i);
-                    i++;
-                    setTimeout(typeWriter, 100);
+        });
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                const targetTab = tab.getAttribute('data-tab');
+                tabContents.forEach(content => {
+                    content.style.display = 'none';
+                });
+                document.getElementById(targetTab).style.display = 'block';
+
+                if (targetTab === 'skills') {
+                    setTimeout(animateSkills, 100);
                 }
-            }
-            
-            setTimeout(typeWriter, 500);
-            
-            // Initialize the first tab's content
-            animateSkillBars();
-            
-            // Initialize intersection observer for animations on scroll
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        // Trigger animations when element comes into view
-                        if (entry.target.classList.contains('skill-category')) {
-                            const skillBars = entry.target.querySelectorAll('.skill-level');
-                            animateSkillBars(skillBars);
-                        }
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, { threshold: 0.1 });
-            
-            // Observe all skill categories
-            document.querySelectorAll('.skill-category').forEach(category => {
-                observer.observe(category);
-            });
-            
-            // Add floating animation to project cards
-            const projectCards = document.querySelectorAll('.projects-grid .project-card');
-            projectCards.forEach(card => {
-                card.addEventListener('mouseenter', () => {
-                    card.style.transform = 'translateY(-10px)';
-                    card.style.boxShadow = '0 10px 20px rgba(0,0,0,0.2)';
-                });
-                
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'translateY(0)';
-                    card.style.boxShadow = '0 2px 5px rgba(0,0,0,0.1)';
-                });
             });
         });
+
+        function animateSkills() {
+            const skillBars = document.querySelectorAll('.skill-bar-fill');
+            skillBars.forEach(bar => {
+                const width = bar.getAttribute('data-width');
+                bar.style.width = width + '%';
+            });
+        }
+
+        const nameText = "Arpit (Echo Cipher)";
+        const nameElement = document.getElementById('nameTyping');
+        let i = 0;
+
+        function typeWriter() {
+            if (i < nameText.length) {
+                nameElement.textContent += nameText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100);
+            }
+        }
+
+        setTimeout(typeWriter, 500);
     </script>
 </body>
 </html>
